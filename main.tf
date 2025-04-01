@@ -13,7 +13,7 @@ resource "vault_aws_secret_backend_role" "probable_pancake_role" {
   backend         = vault_aws_secret_backend.aws.path
   name            = "probable-pancake-tf"
   credential_type = "assumed_role"
-  role_arns       = ["arn:aws:iam::517068637116:role/dyn-ec2-access"]
+  role_arns       = ["arn:aws:iam::517068637116:role/dyn-ec2-access", "arn:aws:iam::517068637116:role/s3-full-access"]
 }
 
 resource "vault_policy" "probable_pancake" {
@@ -23,7 +23,7 @@ resource "vault_policy" "probable_pancake" {
 }
 
 resource "vault_jwt_auth_backend_role" "probable_pancake" {
-  backend        = "jwt"
+  backend        = var.tf_jwt_path
   role_name      = "hcp-tf-probable-pancake"
   token_policies = ["default", vault_policy.probable_pancake.name]
 
