@@ -18,7 +18,7 @@ resource "vault_aws_secret_backend_role" "probable_pancake_role" {
 
 resource "vault_policy" "probable_pancake" {
   name = "aws-probable-pancake"
-  # ref app_policies.tf
+  # ref below
   policy = data.vault_policy_document.probable_pancake.hcl
 }
 
